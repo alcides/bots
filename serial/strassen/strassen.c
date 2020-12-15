@@ -453,7 +453,7 @@ void OptimizedStrassenMultiply(REAL *C, REAL *A, REAL *B, unsigned MatrixSize,
   S8 = (REAL*) Heap; Heap += QuadrantSizeInBytes;
   M2 = (REAL*) Heap; Heap += QuadrantSizeInBytes;
   M5 = (REAL*) Heap; Heap += QuadrantSizeInBytes;
-  T1sMULT = (REAL*) Heap; Heap += QuadrantSizeInBytes;
+  T1sMULT = (REAL*) Heap;
   
   /***************************************************************************
   ** Step through all columns row by row (vertically)
