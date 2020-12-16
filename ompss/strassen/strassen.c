@@ -370,14 +370,14 @@ void MultiplyByDivideAndConquer(REAL *C, REAL *A, REAL *B,
 void OptimizedStrassenMultiply_seq(REAL *C, REAL *A, REAL *B, unsigned MatrixSize,
      unsigned RowWidthC, unsigned RowWidthA, unsigned RowWidthB, int Depth)
 {
-  unsigned QuadrantSize = MatrixSize >> 1; /* MatixSize / 2 */
+  unsigned QuadrantSize = MatrixSize >> 1; /* MatrixSize / 2 */
   unsigned QuadrantSizeInBytes = sizeof(REAL) * QuadrantSize * QuadrantSize
                                  + 32;
   unsigned Column, Row;
   
   /************************************************************************
-  ** For each matrix A, B, and C, we'll want pointers to each quandrant
-  ** in the matrix. These quandrants will be addressed as follows:
+  ** For each matrix A, B, and C, we'll want pointers to each quadrant
+  ** in the matrix. These quadrants will be addressed as follows:
   **  --        --
   **  | A11  A12 |
   **  |          |
@@ -408,7 +408,7 @@ void OptimizedStrassenMultiply_seq(REAL *C, REAL *A, REAL *B, unsigned MatrixSiz
     return;
   }
 
-  /* Initialize quandrant matrices */
+  /* Initialize quadrant matrices */
   #define A11 A
   #define B11 B
   #define C11 C
@@ -439,7 +439,7 @@ void OptimizedStrassenMultiply_seq(REAL *C, REAL *A, REAL *B, unsigned MatrixSiz
   S8 = (REAL*) Heap; Heap += QuadrantSizeInBytes;
   M2 = (REAL*) Heap; Heap += QuadrantSizeInBytes;
   M5 = (REAL*) Heap; Heap += QuadrantSizeInBytes;
-  T1sMULT = (REAL*) Heap; Heap += QuadrantSizeInBytes;
+  T1sMULT = (REAL*) Heap;
   
   /***************************************************************************
   ** Step through all columns row by row (vertically)
@@ -450,7 +450,7 @@ void OptimizedStrassenMultiply_seq(REAL *C, REAL *A, REAL *B, unsigned MatrixSiz
     
     /*************************************************************************
     ** Step through each row horizontally (addressing elements in each column)
-    ** (jumps linearly througn memory => good locality)
+    ** (jumps linearly through memory => good locality)
     *************************************************************************/
     for (Column = 0; Column < QuadrantSize; Column++) {
       
@@ -515,7 +515,7 @@ void OptimizedStrassenMultiply_seq(REAL *C, REAL *A, REAL *B, unsigned MatrixSiz
   for (Row = 0; Row < QuadrantSize; Row++) {
     /*************************************************************************
     ** Step through each row horizontally (addressing elements in each column)
-    ** (jumps linearly througn memory => good locality)
+    ** (jumps linearly through memory => good locality)
     *************************************************************************/
     for (Column = 0; Column < QuadrantSize; Column += 4) {
       REAL LocalM5_0 = *(M5);
@@ -569,14 +569,14 @@ void OptimizedStrassenMultiply_seq(REAL *C, REAL *A, REAL *B, unsigned MatrixSiz
 void OptimizedStrassenMultiply_par(REAL *C, REAL *A, REAL *B, unsigned MatrixSize,
      unsigned RowWidthC, unsigned RowWidthA, unsigned RowWidthB, int Depth)
 {
-  unsigned QuadrantSize = MatrixSize >> 1; /* MatixSize / 2 */
+  unsigned QuadrantSize = MatrixSize >> 1; /* MatrixSize / 2 */
   unsigned QuadrantSizeInBytes = sizeof(REAL) * QuadrantSize * QuadrantSize
                                  + 32;
   unsigned Column, Row;
   
   /************************************************************************
-  ** For each matrix A, B, and C, we'll want pointers to each quandrant
-  ** in the matrix. These quandrants will be addressed as follows:
+  ** For each matrix A, B, and C, we'll want pointers to each quadrant
+  ** in the matrix. These quadrants will be addressed as follows:
   **  --        --
   **  | A11  A12 |
   **  |          |
@@ -607,7 +607,7 @@ void OptimizedStrassenMultiply_par(REAL *C, REAL *A, REAL *B, unsigned MatrixSiz
     return;
   }
 
-  /* Initialize quandrant matrices */
+  /* Initialize quadrant matrices */
   #define A11 A
   #define B11 B
   #define C11 C
@@ -638,7 +638,7 @@ void OptimizedStrassenMultiply_par(REAL *C, REAL *A, REAL *B, unsigned MatrixSiz
   S8 = (REAL*) Heap; Heap += QuadrantSizeInBytes;
   M2 = (REAL*) Heap; Heap += QuadrantSizeInBytes;
   M5 = (REAL*) Heap; Heap += QuadrantSizeInBytes;
-  T1sMULT = (REAL*) Heap; Heap += QuadrantSizeInBytes;
+  T1sMULT = (REAL*) Heap;
   
   /***************************************************************************
   ** Step through all columns row by row (vertically)
@@ -649,7 +649,7 @@ void OptimizedStrassenMultiply_par(REAL *C, REAL *A, REAL *B, unsigned MatrixSiz
     
     /*************************************************************************
     ** Step through each row horizontally (addressing elements in each column)
-    ** (jumps linearly througn memory => good locality)
+    ** (jumps linearly through memory => good locality)
     *************************************************************************/
     for (Column = 0; Column < QuadrantSize; Column++) {
       
@@ -725,7 +725,7 @@ void OptimizedStrassenMultiply_par(REAL *C, REAL *A, REAL *B, unsigned MatrixSiz
   for (Row = 0; Row < QuadrantSize; Row++) {
     /*************************************************************************
     ** Step through each row horizontally (addressing elements in each column)
-    ** (jumps linearly througn memory => good locality)
+    ** (jumps linearly through memory => good locality)
     *************************************************************************/
     for (Column = 0; Column < QuadrantSize; Column += 4) {
       REAL LocalM5_0 = *(M5);
@@ -779,14 +779,14 @@ void OptimizedStrassenMultiply_par(REAL *C, REAL *A, REAL *B, unsigned MatrixSiz
 void OptimizedStrassenMultiply_par(REAL *C, REAL *A, REAL *B, unsigned MatrixSize,
      unsigned RowWidthC, unsigned RowWidthA, unsigned RowWidthB, int Depth)
 {
-  unsigned QuadrantSize = MatrixSize >> 1; /* MatixSize / 2 */
+  unsigned QuadrantSize = MatrixSize >> 1; /* MatrixSize / 2 */
   unsigned QuadrantSizeInBytes = sizeof(REAL) * QuadrantSize * QuadrantSize
                                  + 32;
   unsigned Column, Row;
   
   /************************************************************************
-  ** For each matrix A, B, and C, we'll want pointers to each quandrant
-  ** in the matrix. These quandrants will be addressed as follows:
+  ** For each matrix A, B, and C, we'll want pointers to each quadrant
+  ** in the matrix. These quadrants will be addressed as follows:
   **  --        --
   **  | A11  A12 |
   **  |          |
@@ -817,7 +817,7 @@ void OptimizedStrassenMultiply_par(REAL *C, REAL *A, REAL *B, unsigned MatrixSiz
     return;
   }
 
-  /* Initialize quandrant matrices */
+  /* Initialize quadrant matrices */
   #define A11 A
   #define B11 B
   #define C11 C
@@ -848,7 +848,7 @@ void OptimizedStrassenMultiply_par(REAL *C, REAL *A, REAL *B, unsigned MatrixSiz
   S8 = (REAL*) Heap; Heap += QuadrantSizeInBytes;
   M2 = (REAL*) Heap; Heap += QuadrantSizeInBytes;
   M5 = (REAL*) Heap; Heap += QuadrantSizeInBytes;
-  T1sMULT = (REAL*) Heap; Heap += QuadrantSizeInBytes;
+  T1sMULT = (REAL*) Heap;
   
   /***************************************************************************
   ** Step through all columns row by row (vertically)
@@ -859,7 +859,7 @@ void OptimizedStrassenMultiply_par(REAL *C, REAL *A, REAL *B, unsigned MatrixSiz
     
     /*************************************************************************
     ** Step through each row horizontally (addressing elements in each column)
-    ** (jumps linearly througn memory => good locality)
+    ** (jumps linearly through memory => good locality)
     *************************************************************************/
     for (Column = 0; Column < QuadrantSize; Column++) {
       
@@ -956,7 +956,7 @@ void OptimizedStrassenMultiply_par(REAL *C, REAL *A, REAL *B, unsigned MatrixSiz
   for (Row = 0; Row < QuadrantSize; Row++) {
     /*************************************************************************
     ** Step through each row horizontally (addressing elements in each column)
-    ** (jumps linearly througn memory => good locality)
+    ** (jumps linearly through memory => good locality)
     *************************************************************************/
     for (Column = 0; Column < QuadrantSize; Column += 4) {
       REAL LocalM5_0 = *(M5);
@@ -1010,14 +1010,14 @@ void OptimizedStrassenMultiply_par(REAL *C, REAL *A, REAL *B, unsigned MatrixSiz
 void OptimizedStrassenMultiply_par(REAL *C, REAL *A, REAL *B, unsigned MatrixSize,
      unsigned RowWidthC, unsigned RowWidthA, unsigned RowWidthB, int Depth)
 {
-  unsigned QuadrantSize = MatrixSize >> 1; /* MatixSize / 2 */
+  unsigned QuadrantSize = MatrixSize >> 1; /* MatrixSize / 2 */
   unsigned QuadrantSizeInBytes = sizeof(REAL) * QuadrantSize * QuadrantSize
                                  + 32;
   unsigned Column, Row;
   
   /************************************************************************
-  ** For each matrix A, B, and C, we'll want pointers to each quandrant
-  ** in the matrix. These quandrants will be addressed as follows:
+  ** For each matrix A, B, and C, we'll want pointers to each quadrant
+  ** in the matrix. These quadrants will be addressed as follows:
   **  --        --
   **  | A11  A12 |
   **  |          |
@@ -1048,7 +1048,7 @@ void OptimizedStrassenMultiply_par(REAL *C, REAL *A, REAL *B, unsigned MatrixSiz
     return;
   }
 
-  /* Initialize quandrant matrices */
+  /* Initialize quadrant matrices */
   #define A11 A
   #define B11 B
   #define C11 C
@@ -1079,7 +1079,7 @@ void OptimizedStrassenMultiply_par(REAL *C, REAL *A, REAL *B, unsigned MatrixSiz
   S8 = (REAL*) Heap; Heap += QuadrantSizeInBytes;
   M2 = (REAL*) Heap; Heap += QuadrantSizeInBytes;
   M5 = (REAL*) Heap; Heap += QuadrantSizeInBytes;
-  T1sMULT = (REAL*) Heap; Heap += QuadrantSizeInBytes;
+  T1sMULT = (REAL*) Heap;
   
   /***************************************************************************
   ** Step through all columns row by row (vertically)
@@ -1090,7 +1090,7 @@ void OptimizedStrassenMultiply_par(REAL *C, REAL *A, REAL *B, unsigned MatrixSiz
     
     /*************************************************************************
     ** Step through each row horizontally (addressing elements in each column)
-    ** (jumps linearly througn memory => good locality)
+    ** (jumps linearly through memory => good locality)
     *************************************************************************/
     for (Column = 0; Column < QuadrantSize; Column++) {
       
@@ -1166,7 +1166,7 @@ void OptimizedStrassenMultiply_par(REAL *C, REAL *A, REAL *B, unsigned MatrixSiz
   for (Row = 0; Row < QuadrantSize; Row++) {
     /*************************************************************************
     ** Step through each row horizontally (addressing elements in each column)
-    ** (jumps linearly througn memory => good locality)
+    ** (jumps linearly through memory => good locality)
     *************************************************************************/
     for (Column = 0; Column < QuadrantSize; Column += 4) {
       REAL LocalM5_0 = *(M5);
